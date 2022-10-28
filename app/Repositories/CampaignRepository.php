@@ -32,16 +32,6 @@ class CampaignRepository
 
     public function upsert(array $campaignData)
     {
-        $campaign = Campaign::updateOrCreate(
-            [
-                'name' => $campaignData['name'],
-                'author_id' => $campaignData['author_id'],
-            ],
-            $campaignData
-        );
-
-        //$campaign->inputs()->updateOrCreateMany($campaignData['inputs']);
-
-        return $campaign;
+        return Campaign::updateOrCreate($campaignData);
     }
 }

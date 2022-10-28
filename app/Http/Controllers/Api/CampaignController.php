@@ -34,11 +34,7 @@ class CampaignController extends Controller
 
     public function createCampaign(Request $request): JsonResponse
     {
-        $campaign = $this->campaignRepository->upsert([
-            'name' => $request->input('name'),
-            'author_id' => $request->input('author_id'),
-        ]);
-
+        $campaign = $this->campaignRepository->upsert($request->only(['name', 'author_id', 'code']));
         CreateCampaignInputs::dispatch($campaign, $request->input('inputs'));
 
         return response()->json(['submitted' => true], Response::HTTP_CREATED);

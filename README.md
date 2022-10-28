@@ -68,6 +68,48 @@ Optional parameters:
 - sort_column
 - sort_order
 
+Example Response: 
+```
+{
+	"current_page": 1,
+	"data": [
+		{
+			"id": 1,
+			"name": "Ms World Campaign",
+			"code": "MX-150022",
+			"author_id": "a42bad6c-6361-37f5-bcfe-56624074be60",
+			"created_at": "2022-10-28T19:46:25.000000Z",
+			"updated_at": "2022-10-28T19:46:25.000000Z",
+			"inputs": [
+				{
+					"id": 1,
+					"campaign_id": 1,
+					"type": "channel",
+					"value": "102",
+					"created_at": "2022-10-28T19:46:25.000000Z",
+					"updated_at": "2022-10-28T19:46:25.000000Z"
+				},
+				{
+					"id": 2,
+					"campaign_id": 1,
+					"type": "source",
+					"value": "105",
+					"created_at": "2022-10-28T19:46:25.000000Z",
+					"updated_at": "2022-10-28T19:46:25.000000Z"
+				}
+			]
+		}
+	],
+	"first_page_url": "http:\/\/localhost\/api\/campaigns?page=1",
+	"from": 1,
+	"next_page_url": null,
+	"path": "http:\/\/localhost\/api\/campaigns",
+	"per_page": "20",
+	"prev_page_url": null,
+	"to": 1
+}
+```
+
 #### Create campaign
 
 ```
@@ -76,6 +118,7 @@ Optional parameters:
 {
 	"name": "Hello World Campaign",
 	"author_id": "a42bad6c-6361-37f5-bcfe-56624074be60",
+	"code": "MX-150022",
 	"inputs": [
 		{
 			"type" : "channel",
@@ -92,6 +135,7 @@ Optional parameters:
 Required parameters:
 - name
 - author_id
+- code
 
 Optional parameters:
 - inputs
@@ -108,6 +152,47 @@ Available endpoints for users. Users are static
 Optional filtering parameters:
 - username
 - email
+
+Example Response:
+
+```
+[
+	{
+		"id": "a42bad6c-6361-37f5-bcfe-56624074be60",
+		"name": "John Doe",
+		"username": "johndoe",
+		"email": "johndoe@test.com",
+		"campaigns": [
+			{
+				"id": 1,
+				"name": "Ms World Campaign",
+				"code": "MX-150022",
+				"author_id": "a42bad6c-6361-37f5-bcfe-56624074be60",
+				"created_at": "2022-10-28T19:46:25.000000Z",
+				"updated_at": "2022-10-28T19:46:25.000000Z",
+				"inputs": [
+					{
+						"id": 1,
+						"campaign_id": 1,
+						"type": "channel",
+						"value": "102",
+						"created_at": "2022-10-28T19:46:25.000000Z",
+						"updated_at": "2022-10-28T19:46:25.000000Z"
+					},
+					{
+						"id": 2,
+						"campaign_id": 1,
+						"type": "source",
+						"value": "105",
+						"created_at": "2022-10-28T19:46:25.000000Z",
+						"updated_at": "2022-10-28T19:46:25.000000Z"
+					}
+				]
+			}
+		]
+	}
+]
+```
 
 ## Testing
 You can find tests in the `/tests` folder, and you can run them by using `sail artisan test`.
