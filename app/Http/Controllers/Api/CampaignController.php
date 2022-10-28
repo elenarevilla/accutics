@@ -23,19 +23,19 @@ class CampaignController extends Controller
 
     public function getCampaigns(Request $request)
     {
-        $filters = [
-            'sort_column' => $request->input('sort_column'),
-            'sort_order' => $request->input('sort_order'),
-            'per_page' => $request->input('per_page'),
-        ];
-
-        return response()->json($this->campaignRepository->getCampaigns($filters));
+        return response()->json($this->campaignRepository->getCampaigns($request->only([
+            'sort_column',
+            'sort_order',
+            'per_page',
+        ])));
     }
 
     public function createCampaign(Request $request): JsonResponse
     {
         $campaign = $this->campaignRepository->upsert($request->only(['name', 'author_id', 'code']));
-        CreateCampaignInputs::dispatch($campaign, $request->input('inputs'));
+        $inputs = $request->input('inputs') ?? [];
+
+        CreateCampaignInputs::dispatch($campaign, $inputs);
 
         return response()->json(['submitted' => true], Response::HTTP_CREATED);
     }
