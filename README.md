@@ -17,11 +17,11 @@ Install composer dependencies by running:
 
 ```shell
 docker run --rm \
-    -v $(pwd):/opt \
-    -w /opt \
-    laravelsail/php80-composer:latest \
-    /bin/bash -c \
-    "composer self-update; composer install"
+    -u "$(id -u):$(id -g)" \
+    -v $(pwd):/var/www/html \
+    -w /var/www/html \
+    laravelsail/php81-composer:latest \
+    composer install --ignore-platform-reqs
 ```
 
 Run sail containers:
